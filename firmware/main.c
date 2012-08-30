@@ -69,12 +69,14 @@ void set_signals(uint8_t *pwms)
 // when the user types a character, print it back
 int main(void)
 {
-    uint8_t signals[3] = {1, 1, 1};
+    uint8_t signals[3] = {0, 0, 0};
 
 	CPU_PRESCALE(0);  // run at 16 MHz
+
     pwm_init();
 	uart_init(BAUD_RATE);
-	uart_print("UART Example\r\n");
+    set_signals(signals);
+
 	while (1) {
 		if (uart_available()) {
             uart_get_pwms(signals);
